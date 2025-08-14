@@ -28,18 +28,17 @@ jobs:
 
       - name: upload artifact
         id: deployment
-        working-directory: ./app
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: ./app/dist
 
-deploy:
-  environment:
-    name: github-pages
-    url: ${{ steps.deployment.outputs.page_url }}
-  runs-on: ubuntu-latest
-  needs: build
-  steps:
-    - name: deploy
-      id: deployment
-      uses: actions/deploy-pages@v4
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
